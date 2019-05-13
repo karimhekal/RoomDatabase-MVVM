@@ -97,14 +97,8 @@ public class ViewStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
-        FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
-        buttonAddNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewStudent.this, InsertStudent.class);
-                startActivityForResult(intent, ADD_NOTE_REQUEST); // to get our input back
-            }
-        });
+
+
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -134,19 +128,7 @@ public class ViewStudent extends AppCompatActivity {
                 Toast.makeText(context, "Student Deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
-        studentAdapter.setOnItemClickListener(new StudentAdapter.OnStudentClickListener() { // implementing the interface we created in StudentAdapter
-            @Override
-            public void onItemClick(Student student) {
-                Intent intent = new Intent(ViewStudent.this, InsertStudent.class); // this was supposed to be AddEditNoteActivity.class
-                intent.putExtra(InsertStudent.EXTRA_ID, student.getId()); // passing data to addEditNote activity
-                intent.putExtra(InsertStudent.EXTRA_NAME, student.getName());
-                intent.putExtra(InsertStudent.EXTRA_CGPA, student.getCgpa());
-                intent.putExtra(InsertStudent.EXTRA_COLLEGE, student.getCollege());
-                intent.putExtra(InsertStudent.EXTRA_GENDER, student.getGender());
-                intent.putExtra(InsertStudent.EXTRA_PASSWORD, student.getPassword());
-                startActivityForResult(intent, EDIT_NOTE_REQUEST);
-            }
-        });
+
 
 
     }
