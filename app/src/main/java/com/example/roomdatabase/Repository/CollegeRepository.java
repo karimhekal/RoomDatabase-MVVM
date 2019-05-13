@@ -14,12 +14,14 @@ import androidx.lifecycle.LiveData;
 public class CollegeRepository {
     private CollegeDao collegeDao;
     private LiveData<List<College>> allColleges;
+    private List<College> collegeList;
 
     public CollegeRepository(Application application) // since application is subclass of context so we will pass it
     {
         CollegeDatabase database = CollegeDatabase.getInstance(application);
         collegeDao = database.collegeDao();
         allColleges = collegeDao.getAllColleges();
+
     }
 
     public void insert(College college) {
@@ -28,17 +30,21 @@ public class CollegeRepository {
 
     public void delete(College college) {
         new DeleteCollegeAsynTask(collegeDao).execute(college);
-
     }
+
     public LiveData<List<College>> getAllColleges() { //we'll have to run this in the background as a thread we will use async task to multi thread
         return allColleges;
     }
 
+
+
     private static class DeleteCollegeAsynTask extends AsyncTask<College, Void, Void> {
         private CollegeDao collegeDao; // we need this collegeDao to make database operations
+
         private DeleteCollegeAsynTask(CollegeDao CollegeDao) {
             this.collegeDao = CollegeDao;
         }
+
         @Override
         protected Void doInBackground(College... college) {
             collegeDao.delete(college[0]);

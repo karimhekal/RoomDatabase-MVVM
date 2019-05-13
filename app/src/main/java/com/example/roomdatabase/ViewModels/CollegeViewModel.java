@@ -24,14 +24,14 @@ public class CollegeViewModel extends AndroidViewModel {
 
     }
 
-    public void insert(College collge) {
-        repository.insert(collge);
+    public void insert(College college) {
+        repository.insert(college);
     }
-
 
     public void delete(College college) {
         repository.delete(college);
     }
+
 
 
     public LiveData<List<College>> getAllColleges() {

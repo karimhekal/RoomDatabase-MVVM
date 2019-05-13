@@ -20,4 +20,5 @@ public interface CollegeDao {
 
     @Query("SELECT * FROM college_table")
     LiveData<List<College>> getAllColleges();    // live data means that data are automatically updated if it changes
+
 }

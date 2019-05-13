@@ -21,7 +21,9 @@
     <Spinner
         android:layout_width="match_parent"
         android:hint="college"
-        
+        android:backgroundTint="@color/colorPrimary"
+        android:textColorHint="#05ab9a"
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
         android:layout_marginVertical="20dp"
         android:inputType="text"
         android:id="@+id/spinner_college"
