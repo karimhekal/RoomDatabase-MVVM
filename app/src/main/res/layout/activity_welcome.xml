@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Views.WelcomeActivity">
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Insert Student"
+        android:id="@+id/insert_student"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/view_student"
+        android:layout_width="300dp"
+        android:layout_margin="60dp"
+        android:layout_height="wrap_content"
+        android:text="View Student" />
+
+    <Button
+        android:id="@+id/edit_college"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Edit College" />
+
+</LinearLayout>

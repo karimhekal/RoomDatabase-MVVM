@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="name"
+        android:inputType="text"
+        android:id="@+id/edit_text_name"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="CGPA"
+        android:inputType="text"
+
+        android:id="@+id/edit_text_cgpa"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:hint="college"
+        
+        android:layout_marginVertical="20dp"
+        android:inputType="text"
+        android:id="@+id/spinner_college"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="gender"
+        android:inputType="text"
+        android:id="@+id/edit_text_gender"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="password"
+        android:inputType="text"
+        android:id="@+id/edit_text_password"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
