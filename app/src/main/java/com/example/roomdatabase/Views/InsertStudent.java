@@ -1,9 +1,11 @@
 package com.example.roomdatabase.Views;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +62,7 @@ public class InsertStudent extends AppCompatActivity {
         editTextPassword = findViewById(R.id.edit_text_password);
         collegeSpinner = (Spinner) findViewById(R.id.spinner_college);
         final ArrayList<String> collegesList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.small_view, collegesList);
 
         final CollegeAdapter collegeAdapter = new CollegeAdapter();
         collegeViewModel = ViewModelProviders.of(this).get(CollegeViewModel.class);
@@ -69,18 +72,11 @@ public class InsertStudent extends AppCompatActivity {
                 //this is what happens when when data changes // the code bellow should be related to changing the view so it displays the d
                 //Toast.makeText(context, "onChanged", Toast.LENGTH_SHORT).show(); // this toast was to make sure that the live data is changed
                 collegeAdapter.setColleges(colleges);  // getting colleges from database and assigning it to collegeadapter
-
-                for (int i=0;i<collegeAdapter.getItemCount();i++)
-                {
-                    collegesList.add(collegeAdapter.getCollegeAt(i).getCollegeName());
-                }
+                addElements(collegeAdapter, collegesList);
             }
         });
 
-
-       // colleges.add(collegeAdapter.getCollegeAt(1).getCollegeName());
-        adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.small_view, collegesList);
-        collegeSpinner.setAdapter(adapter);
+        //  collegeSpinner.setAdapter(adapter);
 
         studentViewModel = ViewModelProviders.of(this).get(StudentViewModel.class);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -92,7 +88,6 @@ public class InsertStudent extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 ((TextView) view).setTextColor(Color.BLACK);
                 Toast.makeText(InsertStudent.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -101,6 +96,32 @@ public class InsertStudent extends AppCompatActivity {
             }
         });
 
+
+        getIntents();
+    }
+
+    private void getIntents() {
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Student");
+            editTextName.setText(intent.getStringExtra(EXTRA_NAME));
+            editTextCGPA.setText(intent.getStringExtra(EXTRA_CGPA));
+            editTextCollege.setText(intent.getStringExtra(EXTRA_COLLEGE)); // spinner
+            editTextGender.setText(intent.getStringExtra(EXTRA_GENDER));
+            editTextPassword.setText(intent.getStringExtra(EXTRA_PASSWORD));
+
+            // numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1)); // 1 is defualt value in case the extra is missing
+        } else {
+            setTitle("Add Student");
+        }
+    }
+
+    public void addElements(CollegeAdapter collegeAdapter, ArrayList<String> collegesList) {
+        for (int i = 0; i < collegeAdapter.getItemCount(); i++) {
+            collegesList.add(collegeAdapter.getCollegeAt(i).getCollegeName());
+        }
+        collegeSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -115,11 +136,15 @@ public class InsertStudent extends AppCompatActivity {
 
     }
 
+
     private void saveNote() {
         String name = editTextName.getText().toString();
         String GPA = editTextCGPA.getText().toString();
-        String college = editTextCollege.getText().toString();
-        // String spinnerCollege= collegeSpinner.get
+        String college = "";
+        if (collegeSpinner == null) {
+            collegeSpinner.setSelection(0);
+        }
+        college = collegeSpinner.getSelectedItem().toString().trim();
         String gender = editTextGender.getText().toString();
         String password = editTextPassword.getText().toString();
         if (name.trim().isEmpty() || GPA.trim().isEmpty() || college.trim().isEmpty() || gender.trim().isEmpty() || password.trim().isEmpty()) {

@@ -37,7 +37,6 @@ public class CollegeRepository {
     }
 
 
-
     private static class DeleteCollegeAsynTask extends AsyncTask<College, Void, Void> {
         private CollegeDao collegeDao; // we need this collegeDao to make database operations
 

@@ -101,7 +101,7 @@ public class ViewStudent extends AppCompatActivity {
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewStudent.this, AddEditNoteActivity.class);
+                Intent intent = new Intent(ViewStudent.this, InsertStudent.class);
                 startActivityForResult(intent, ADD_NOTE_REQUEST); // to get our input back
             }
         });
@@ -137,14 +137,13 @@ public class ViewStudent extends AppCompatActivity {
         studentAdapter.setOnItemClickListener(new StudentAdapter.OnStudentClickListener() { // implementing the interface we created in StudentAdapter
             @Override
             public void onItemClick(Student student) {
-                Intent intent = new Intent(ViewStudent.this, AddEditNoteActivity.class);
-                intent.putExtra(AddEditNoteActivity.EXTRA_ID, student.getId()); // passing data to addEditNote activity
-                intent.putExtra(AddEditNoteActivity.EXTRA_NAME, student.getName());
-                intent.putExtra(AddEditNoteActivity.EXTRA_CGPA, student.getCgpa());
-                intent.putExtra(AddEditNoteActivity.EXTRA_COLLEGE, student.getCollege());
-                intent.putExtra(AddEditNoteActivity.EXTRA_GENDER, student.getGender());
-                intent.putExtra(AddEditNoteActivity.EXTRA_PASSWORD, student.getPassword());
-
+                Intent intent = new Intent(ViewStudent.this, InsertStudent.class); // this was supposed to be AddEditNoteActivity.class
+                intent.putExtra(InsertStudent.EXTRA_ID, student.getId()); // passing data to addEditNote activity
+                intent.putExtra(InsertStudent.EXTRA_NAME, student.getName());
+                intent.putExtra(InsertStudent.EXTRA_CGPA, student.getCgpa());
+                intent.putExtra(InsertStudent.EXTRA_COLLEGE, student.getCollege());
+                intent.putExtra(InsertStudent.EXTRA_GENDER, student.getGender());
+                intent.putExtra(InsertStudent.EXTRA_PASSWORD, student.getPassword());
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
         });
