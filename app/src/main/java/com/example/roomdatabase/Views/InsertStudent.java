@@ -97,25 +97,10 @@ public class InsertStudent extends AppCompatActivity {
         });
 
 
-        getIntents();
+
     }
 
-    private void getIntents() {
-        Intent intent = getIntent();
 
-        if (intent.hasExtra(EXTRA_ID)) {
-            setTitle("Edit Student");
-            editTextName.setText(intent.getStringExtra(EXTRA_NAME));
-            editTextCGPA.setText(intent.getStringExtra(EXTRA_CGPA));
-            editTextCollege.setText(intent.getStringExtra(EXTRA_COLLEGE)); // spinner
-            editTextGender.setText(intent.getStringExtra(EXTRA_GENDER));
-            editTextPassword.setText(intent.getStringExtra(EXTRA_PASSWORD));
-
-            // numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1)); // 1 is defualt value in case the extra is missing
-        } else {
-            setTitle("Add Student");
-        }
-    }
 
     public void addElements(CollegeAdapter collegeAdapter, ArrayList<String> collegesList) {
         for (int i = 0; i < collegeAdapter.getItemCount(); i++) {
