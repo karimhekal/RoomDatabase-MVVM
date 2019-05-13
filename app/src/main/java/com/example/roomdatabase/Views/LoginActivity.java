@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.loginBtn);
         studentViewModel = ViewModelProviders.of(this).get(StudentViewModel.class);
 
-        studentViewModel.getAllNotes().observe(this, new Observer<List<Student>>() {
+        studentViewModel.getAllStudents().observe(this, new Observer<List<Student>>() {
             @Override
             public void onChanged(List<Student> students) {
                 //this is what happens when when data changes // the code bellow should be related to changing the view so it displays the d
@@ -51,10 +51,12 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                 if (user.getText().toString().equals("admin") && pass.getText().toString().equals("admin")) {
                     startActivity(intent);
+                    intent.putExtra("USERNAME_EXTRA", user.getText().toString());
                 } else {
-                    for (int i = 0; i < studentAdapter.getItemCount(); i++) { // accessing the data in noteadapter
+                    for (int i = 0; i < studentAdapter.getItemCount(); i++) { // accessing the data in studentAdapter
                         if ((studentAdapter.getStudentAt(i).getName().equals(user.getText().toString())) && (studentAdapter.getStudentAt(i).getPassword().equals(pass.getText().toString()))) {
                             Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
+                            intent.putExtra("USERNAME_EXTRA", user.getText().toString());
                             startActivity(intent);
                             break; // get out of the loop
                         } else {

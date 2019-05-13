@@ -3,7 +3,7 @@ package com.example.roomdatabase.Databases;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.roomdatabase.DAOs.NoteDao;
+import com.example.roomdatabase.DAOs.StudentDao;
 import com.example.roomdatabase.Model.Student;
 
 import androidx.annotation.NonNull;
@@ -13,9 +13,9 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = Student.class, version = 6,exportSchema = false)
-public abstract class NoteDatabase extends RoomDatabase {
+public abstract class StudentDatabase extends RoomDatabase {
 
-    private static NoteDatabase instance;
+    private static StudentDatabase instance;
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() { // populating our database
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -24,11 +24,11 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
     };
 
-    public static synchronized NoteDatabase getInstance(Context context) // getter that gets the context of app
+    public static synchronized StudentDatabase getInstance(Context context) // getter that gets the context of app
     { // we're making a singleton
         if (instance == null) // if there's no object created from this class
         {
-            instance = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "employee_database")
+            instance = Room.databaseBuilder(context.getApplicationContext(), StudentDatabase.class, "employee_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback) // when our instance is first created , it will it will execute the oncreate method that's in roomCallback
                     .build(); // create one and build it
@@ -38,20 +38,20 @@ public abstract class NoteDatabase extends RoomDatabase {
     }
 
     // room subclasses our abstract class
-    public abstract NoteDao noteDao();
+    public abstract StudentDao studentDao();
 
     private static class PopulateDbAsynTask extends AsyncTask<Void, Void, Void> { // we need to execute this aynstask in onCreate
-        private NoteDao noteDao;
+        private StudentDao studentDao;
 
-        private PopulateDbAsynTask(NoteDatabase db) {
-            noteDao = db.noteDao();
+        private PopulateDbAsynTask(StudentDatabase db) {
+            studentDao = db.studentDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Student("mohamed", "karim", "3.3", "IT", "male"));
-            noteDao.insert(new Student("ahmed", "ahmed", "3.2", "IT", "male"));
-            noteDao.insert(new Student("emad", "emad", "2.3", "IT", "male"));
+            studentDao.insert(new Student("mohamed", "karim", "3.3", "IT", "male"));
+            studentDao.insert(new Student("ahmed", "ahmed", "3.2", "IT", "male"));
+            studentDao.insert(new Student("emad", "emad", "2.3", "IT", "male"));
 
             return null;
         }

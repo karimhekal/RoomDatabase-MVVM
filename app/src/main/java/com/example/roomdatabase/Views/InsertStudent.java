@@ -1,6 +1,5 @@
 package com.example.roomdatabase.Views;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +21,6 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 import com.example.roomdatabase.Adapter.CollegeAdapter;
-import com.example.roomdatabase.Adapter.StudentAdapter;
 import com.example.roomdatabase.Model.College;
 import com.example.roomdatabase.Model.Student;
 import com.example.roomdatabase.ViewModels.CollegeViewModel;
@@ -54,7 +51,7 @@ public class InsertStudent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_note); // init View
+        setContentView(R.layout.activity_add_student); // init View
         editTextName = findViewById(R.id.edit_text_name);
         editTextCGPA = findViewById(R.id.edit_text_cgpa);
         editTextCollege = findViewById(R.id.edit_text_college);
@@ -96,10 +93,24 @@ public class InsertStudent extends AppCompatActivity {
             }
         });
 
-
+        getIntents();
 
     }
 
+    private void getIntents() {
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Student");
+            editTextName.setText(intent.getStringExtra(EXTRA_NAME));
+            editTextCGPA.setText(intent.getStringExtra(EXTRA_CGPA));
+            // editTextCollege.setText(intent.getStringExtra(EXTRA_COLLEGE));
+            editTextGender.setText(intent.getStringExtra(EXTRA_GENDER));
+            editTextPassword.setText(intent.getStringExtra(EXTRA_PASSWORD));
+
+            // numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1)); // 1 is defualt value in case the extra is missing
+        }
+    }
 
 
     public void addElements(CollegeAdapter collegeAdapter, ArrayList<String> collegesList) {
@@ -112,8 +123,8 @@ public class InsertStudent extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_note:
-                saveNote();
+            case R.id.save_student:
+                saveStudent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -122,7 +133,7 @@ public class InsertStudent extends AppCompatActivity {
     }
 
 
-    private void saveNote() {
+    private void saveStudent() {
         String name = editTextName.getText().toString();
         String GPA = editTextCGPA.getText().toString();
         String college = "";
@@ -138,7 +149,7 @@ public class InsertStudent extends AppCompatActivity {
         }
 
 
-        //   int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1); // 1 is just incase the integer is missing so it's 1 by default
+        //   int priority = data.getIntExtra(AddEditStudentActivity.EXTRA_PRIORITY, 1); // 1 is just incase the integer is missing so it's 1 by default
         Student student = new Student(name, password, GPA, college, gender);
 
         studentViewModel.insert(student);
@@ -148,7 +159,7 @@ public class InsertStudent extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_note_menu, menu);
+        menuInflater.inflate(R.menu.add_student_menu, menu);
         return true;
     }
 

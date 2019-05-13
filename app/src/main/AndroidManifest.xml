@@ -15,20 +15,20 @@
             android:name=".Views.WelcomeActivity"
             android:parentActivityName=".Views.LoginActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".Views.AddEditNoteActivity"
+            android:name=".Views.AddEditStudentActivity"
             android:parentActivityName=".Views.ViewStudent" />
         <activity
             android:name=".Views.ViewStudent"
             android:launchMode="singleTop" />
         <activity android:name=".Views.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

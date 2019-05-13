@@ -3,5 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item android:title="Delete All Notes"
     app:showAsAction="never"
-    android:id="@+id/delete_all_notes"></item>
+    android:id="@+id/delete_all_students"></item>
 </menu>

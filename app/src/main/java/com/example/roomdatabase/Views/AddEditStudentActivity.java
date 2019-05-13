@@ -6,14 +6,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.roomdatabase.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddEditNoteActivity extends AppCompatActivity {
+public class AddEditStudentActivity extends AppCompatActivity {
     public static final String EXTRA_NAME = "com.example.roomdatabase.EXTRA_NAME";
     public static final String EXTRA_COLLEGE = "com.example.roomdatabase.EXTRA_COLLEGE";
     public static final String EXTRA_GENDER = "com.example.roomdatabase.EXTRA_GENDER";
@@ -24,12 +23,12 @@ public class AddEditNoteActivity extends AppCompatActivity {
     private EditText editTextName;
     private EditText editTextCGPA;
     private EditText editTextCollege, editTextGender, editTextPassword;
-   // private NumberPicker numberPickerPriority;
+    // private NumberPicker numberPickerPriority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_note);
+        setContentView(R.layout.activity_add_student);
         editTextName = findViewById(R.id.edit_text_name);
         editTextCGPA = findViewById(R.id.edit_text_cgpa);
         editTextCollege = findViewById(R.id.edit_text_college);
@@ -52,7 +51,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
             editTextGender.setText(intent.getStringExtra(EXTRA_GENDER));
             editTextPassword.setText(intent.getStringExtra(EXTRA_PASSWORD));
 
-           // numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1)); // 1 is defualt value in case the extra is missing
+            // numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1)); // 1 is defualt value in case the extra is missing
         } else {
             setTitle("Add Student");
         }
@@ -61,8 +60,8 @@ public class AddEditNoteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_note:
-                saveNote();
+            case R.id.save_student:
+                saveStudent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -70,15 +69,15 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
     }
 
-    private void saveNote() {
+    private void saveStudent() {
         String name = editTextName.getText().toString();
         String GPA = editTextCGPA.getText().toString();
         String college = editTextCollege.getText().toString();
         String gender = editTextGender.getText().toString();
         String password = editTextPassword.getText().toString();
-      //  int priority = numberPickerPriority.getValue();
+        //  int priority = numberPickerPriority.getValue();
 
-        if (name.trim().isEmpty() || GPA.trim().isEmpty()||college.trim().isEmpty()||gender.trim().isEmpty()||password.trim().isEmpty()) {
+        if (name.trim().isEmpty() || GPA.trim().isEmpty() || college.trim().isEmpty() || gender.trim().isEmpty() || password.trim().isEmpty()) {
             Toast.makeText(this, "Please fill all data", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -91,7 +90,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1); // whenever this value is -1 , the id is invalid
-        if (id != -1) {// means there's data and we're editing note not Adding one
+        if (id != -1) {// means there's data and we're editing student not Adding one
             data.putExtra(EXTRA_ID, id);
         }
 
@@ -103,7 +102,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_note_menu, menu);
+        menuInflater.inflate(R.menu.add_student_menu, menu);
         return true;
     }
 }

@@ -3,7 +3,7 @@ package com.example.roomdatabase.ViewModels;
 import android.app.Application;
 
 import com.example.roomdatabase.Model.Student;
-import com.example.roomdatabase.Repository.NoteRepository;
+import com.example.roomdatabase.Repository.StudentRepository;
 
 import java.util.List;
 
@@ -13,14 +13,14 @@ import androidx.lifecycle.LiveData;
 
 public class StudentViewModel extends AndroidViewModel {
 
-    private NoteRepository repository;
-    private LiveData<List<Student>> allNotes;
+    private StudentRepository repository;
+    private LiveData<List<Student>> allStudents;
 
     public StudentViewModel(@NonNull Application application) {
 
         super(application);
-        repository = new NoteRepository(application);
-        allNotes = repository.getAllNotes();
+        repository = new StudentRepository(application);
+        allStudents = repository.getAllStudents();
 
     }
 
@@ -38,13 +38,13 @@ public class StudentViewModel extends AndroidViewModel {
 
 
 
-    public void deleteAllNotes() {
-        repository.deleteAllNotes();
+    public void deleteAllStudents() {
+        repository.deleteAllStudents();
     }
 
 
-    public LiveData<List<Student>> getAllNotes() {
-        return allNotes;
+    public LiveData<List<Student>> getAllStudents() {
+        return allStudents;
     }
 
 }
