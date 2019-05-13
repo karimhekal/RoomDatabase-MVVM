@@ -50,8 +50,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                 if (user.getText().toString().equals("admin") && pass.getText().toString().equals("admin")) {
-                    startActivity(intent);
                     intent.putExtra("USERNAME_EXTRA", user.getText().toString());
+                    startActivity(intent);
+
                 } else {
                     for (int i = 0; i < studentAdapter.getItemCount(); i++) { // accessing the data in studentAdapter
                         if ((studentAdapter.getStudentAt(i).getName().equals(user.getText().toString())) && (studentAdapter.getStudentAt(i).getPassword().equals(pass.getText().toString()))) {
